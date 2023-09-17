@@ -65,14 +65,6 @@ app.get('/', function(req, res){
         
 });
 
-app.get('/delete-contact/:phone', function(req, res){
-    let phone = req.params.phone;
-    let contactIndex = contactList.findIndex(contact=> contact.phone == phone);
-    if (contactIndex != -1){
-        contactList.splice(contactIndex, 1); 
-    }
-    return res.redirect('back');
-});
 
 app.get('/delete-contact/:id', function(req, res){
     // get the id from the params
@@ -80,12 +72,13 @@ app.get('/delete-contact/:id', function(req, res){
     // find the contact in the database and delete it
     ContactFromModels.findByIdAndDelete(id)
     .then(function(contact) {
-        console.log(contact,' successfully deleted');
+        console.log(contact,'successfully deleted the contact with id :: ', id);
         return res.redirect('back');
     }).catch(function(err) {
         console.error('error deleting contact');
         return;
     });
+
 });
 
 app.listen(port,function(err){
