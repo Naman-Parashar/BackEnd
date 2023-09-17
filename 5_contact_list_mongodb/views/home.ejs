@@ -16,7 +16,8 @@
                         <p><%= i.phone %></p>
                     </div>
                     <div class="delete-button">
-                        <a href="/delete-contact/<%= i.phone %>">
+                        <!-- i.id as mondo by default provide an id -->
+                        <a href="/delete-contact/<%= i.id %>">
                             <i class="fas fa-window-close"></i>
                         </a>
                     </div>

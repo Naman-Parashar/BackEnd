@@ -48,11 +48,21 @@ app.post('/create-contact', function(req, res){
      return res.redirect('back');
 });
 
-app.get('/',function(req,res){
-    return res.render('home',{
-        title:"Contact List",
-        contact_list:contactList
+app.get('/', function(req, res){
+    // first featch contact
+    ContactFromModels.find({})
+    .then(function(contacts){
+        return res.render('home', {
+            title : 'My Contact List',
+            contact_list : contacts
+        });
     })
+    .catch(function( err){
+        if(err){
+            console.log('Error');
+            return;
+        }});
+        
 });
 
 app.get('/delete-contact/:phone', function(req, res){
@@ -64,6 +74,19 @@ app.get('/delete-contact/:phone', function(req, res){
     return res.redirect('back');
 });
 
+app.get('/delete-contact/:id', function(req, res){
+    // get the id from the params
+    let id = req.params.id;
+    // find the contact in the database and delete it
+    ContactFromModels.findByIdAndDelete(id)
+    .then(function(contact) {
+        console.log(contact,' successfully deleted');
+        return res.redirect('back');
+    }).catch(function(err) {
+        console.error('error deleting contact');
+        return;
+    });
+});
 
 app.listen(port,function(err){
     if(err) { console.log(err); }
