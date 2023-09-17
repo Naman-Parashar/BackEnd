@@ -1,0 +1,51 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+#page-heading{
+    text-align: center;
+    margin-top: 25px;
+    color: gray;
+    font-family: sans-serif;
+}
+ul{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+ul li, li #details{
+    width: 500px;
+    height: 40px;
+    list-style: none;
+    color: aliceblue;
+    background-color: rgb(116, 116, 233);
+    margin-bottom: 5px;
+    padding: 0 10 0 10;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;   
+}
+ul li #details:hover{
+    background-color: darkgray;
+}
+
+
+ul li .delete-button{
+    text-align: center;
+    padding-top: 8px;
+    padding-left: 5px;
+}
+ul li .delete-button a i{
+    font-size: x-large;
+    color: red;
+}
+form{
+    display: flex;
+    justify-content: center;
+}
+button{
+    background-color: black;
+    color: aliceblue;
+    border-radius: 5px;
+    margin-left: 10px;
+}

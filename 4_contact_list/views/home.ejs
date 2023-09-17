@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title> <%= title %></title>\
+        <link rel="stylesheet" href="/css/home.css">
+    </head>
+    <body>
+        <h1 id="page-heading">My Contact List</h1>
+
+        <div  id="contact-list-container">
+            <ul>
+                <% for(let i of contact_list) { %>
+
+                <li>
+                    <div id="details">
+                        <p> <%= i.name %> </p>
+                        <p><%= i.phone %></p>
+                    </div>
+                    <div class="delete-button">
+                        <a href="/delete-contact/<%= i.phone %>">
+                            <i class="fas fa-window-close"></i>
+                        </a>
+                    </div>
+                </li>
+
+                <% } %>
+            </ul>
+        </div>
+
+        <!-- action here tells us where we want to send the data (we have to define that url in index.js) -->
+        <form id="new-contact-form" action="/create-contact" method="POST">
+            <input type="text" name="name" placeholder="Enter Name" required>
+            <input type="number" name="phone" placeholder="Enter Phone Number" required>
+            <button type="submit">Add Contact</button>
+        </form>
+
+        <script type="text/javascript" src="#"></script>
+        <script src="https://kit.fontawesome.com/6f696a5c4e.js" crossorigin="anonymous"></script>
+    </body>
+</html>
