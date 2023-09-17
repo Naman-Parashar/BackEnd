@@ -6,7 +6,7 @@ const port = 8000;
 const db = require('./config/mongoose');
 
 // requiring models Schema
-const Contact = require('./Models/contact');
+const ContactFromModels = require('./Models/contact');
 // call express
 const app = express();
 
@@ -18,20 +18,36 @@ app.set('views',path.join(__dirname,'Views'));
 app.use(express.urlencoded());
 app.use(express.static('Assets')); 
 
+
 var contactList = [
     {
-        name: "Naman",
+        name: "John",
         phone:"11111111111"
     },
     {
-        name: "Sangam",
+        name: "tony",
         phone:"222222222222"
     },
     {
-        name: "Shivansh",
+        name: "hulk",
         phone:"333333333333"
     }
 ]; 
+
+
+app.post('/create-contact', function(req, res){
+    const createdContact =   ContactFromModels.create({
+        name: req.body.name,
+        phone: req.body.phone
+     }).then(function(newContact){
+        console.log("******", newContact);
+     }).catch(function(err){
+        console.log("There is an error :: ",err);
+     });
+
+     return res.redirect('back');
+});
+
 app.get('/',function(req,res){
     return res.render('home',{
         title:"Contact List",
@@ -48,10 +64,6 @@ app.get('/delete-contact/:phone', function(req, res){
     return res.redirect('back');
 });
 
-app.post('/create-contact', function(req, res){
-    contactList.push(req.body);
-    return res.redirect('back'); 
-});
 
 app.listen(port,function(err){
     if(err) { console.log(err); }
